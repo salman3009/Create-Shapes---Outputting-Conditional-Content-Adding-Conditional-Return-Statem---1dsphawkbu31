@@ -1,28 +1,38 @@
 import React, { useState } from 'react'
 import '../styles/App.css';
 const App = () => {
-  const [shapes,setShapes] = useState([])
-  const [selected,setSelected] = useState('square')
-  const handleAddShape = () => {
-    const oldShapes = [...shapes]
-    oldShapes.push(selected.toLowerCase())
-    setShapes(oldShapes)
-    console.log(selected)
-  }
-  return (
-    <div id="main">
-      <div id="shape-creator">
-        <select onChange={(e)=>setSelected(e.target.value)} value={selected}>
-          <option id="option-square">Square</option>
-          <option id="option-circle">Circle</option>
-        </select>
-        <button onClick={handleAddShape}>Add Shape</button>
-      </div>
-      <div id="shapes-holder">
-        {shapes.map((shape,idx)=><div className={shape} key={idx}>{idx}</div>)}
-      </div>
-    </div>
-  )
+  const [getselected,setSelected] = useState('Square');
+const [getList,setList] = useState([]);
+
+const onChangeHandler=(event)=>{
+      console.log(event.target.value);
+      setSelected(event.target.value); 
+} 
+
+const handleAddShape=()=>{
+  const list =[...getList,getselected.toLowerCase()];
+  setList(list); 
+}
+
+return (
+
+<div id="main">
+
+<div id="shape-creator">
+  <select onChange={onChangeHandler} value={getselected}>
+    <option>Square</option>
+    <option>Circle</option>
+  </select>
+  <button onClick={handleAddShape}>Add Shapes</button>
+</div>
+
+<div id="shapes-holder">
+    {getList.map((obj,index)=>{
+         return (<div className={obj} key={index}>{index}</div>)
+    })}
+
+</div>
+</div>)
 }
 
 
